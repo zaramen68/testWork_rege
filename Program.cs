@@ -25,6 +25,17 @@ namespace testWork
             string patterDays = @"\p{Ll}{2}|\p{Ll}{2}-\p{Ll}{2}";
             string cab = @"\bкаб\w*|\bпомещ\w*";
             string cabNum = @"\d+";
+
+            string patMonday = "пн";
+            string patTuesday = "вт";
+            string patWednesday = "ср";
+            string patThursday = "чт";
+            string patFriday = "пт";
+            string patSaturday = "сб";
+            string patSunday = "вс";
+
+
+
             Regex regexCab = new Regex(cab);
             Regex regexCabNum = new Regex(cabNum);
             Regex regexDays = new Regex(patterDays);
@@ -56,7 +67,15 @@ namespace testWork
                 MatchCollection matchDays = regexDays.Matches(item);
                 if (matchDays.Count > 0)
                 {
-                    reStruct.Add("Рабочие дни:", item);
+                    string iItem = Regex.Replace(item, patMonday, "понедельник");
+                    iItem = Regex.Replace(iItem, patTuesday, "вторник");
+                    iItem = Regex.Replace(iItem, patWednesday, "среда");
+                    iItem = Regex.Replace(iItem, patThursday, "четверг");
+                    iItem = Regex.Replace(iItem, patFriday, "пятница");
+                    iItem = Regex.Replace(iItem, patSaturday, "суббота");
+                    iItem = Regex.Replace(iItem, patSunday, "воскресенье");
+
+                    reStruct.Add("Рабочие дни:", iItem);
                     continue;
                 }
                 MatchCollection matchTime = regexTime.Matches(item);
