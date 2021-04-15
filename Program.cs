@@ -11,6 +11,27 @@ namespace testWork
     
     class Program
     {
+        public static DateTime ParceDate(string source)
+        {
+            string ddmm;
+            DateTime resDate=new DateTime();
+            string patternYear = @"\d{4}";
+            string patternDay = @"\d{2}";
+            Regex reDay = new Regex(patternDay);
+            Regex reYear = new Regex(patternYear);
+            MatchCollection maDate = reYear.Matches(source);
+            ddmm = Regex.Replace(source, patternYear, "");
+            MatchCollection maDDMM = reDay.Matches(ddmm);
+
+            switch (maDDMM.Count)
+            {
+                case 2:
+                    break;
+                case 4:
+                    break;
+            }
+            return resDate;
+        }
  
            public static string ParceData(string source)
            {
@@ -120,6 +141,8 @@ namespace testWork
        
         static void Main(string[] args)
         {
+
+            DateTime dateTime = ParceDate("08/04.2020");
             string str = "Иванов Иван, 97 кабинет, пн-ср, 06:00 - 15:00, 11:00-12:00";
             string result = ParceData(str);
             Console.WriteLine(result);
