@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace testWork
 {
@@ -13,23 +14,72 @@ namespace testWork
     {
         public static DateTime ParceDate(string source)
         {
-            string ddmm;
+            int year;
+            string sYear;
             DateTime resDate=new DateTime();
-            string patternYear = @"\d{4}";
-            string patternDay = @"\d{2}";
-            Regex reDay = new Regex(patternDay);
-            Regex reYear = new Regex(patternYear);
-            MatchCollection maDate = reYear.Matches(source);
-            ddmm = Regex.Replace(source, patternYear, "");
-            MatchCollection maDDMM = reDay.Matches(ddmm);
+            Calendar myCal = CultureInfo.InvariantCulture.Calendar;
+            string ddmm;
+            
+            string patternYear4 = @"\d{4}";
+            string patternYear2 = @"\d{2}";
+           
+            
+            Regex reYear4 = new Regex(patternYear4);
+            Regex reYear2 = new Regex(patternYear2);
 
-            switch (maDDMM.Count)
+            MatchCollection maY4 = reYear4.Matches(source);
+           
+
+            ddmm = Regex.Replace(source, patternYear4, "");
+            //MatchCollection maDDMM = reDay.Matches(ddmm);
+            MatchCollection maY2 = reYear2.Matches(ddmm);
+            if (maY4.Count>0)
             {
-                case 2:
-                    break;
-                case 4:
-                    break;
+ 
+                sYear = maY4[0].Value;
+                resDate=new DateTime(Int32.Parse(sYear), 1, 1, new GregorianCalendar());
+                        
+                switch (maY2.Count)
+                {
+                    case 1:
+                        // Неделя
+
+                        resDate = myCal.AddWeeks(resDate, Int32.Parse(maY2[0].Value));
+                        break;
+                    case 2:
+                        // День и месяц
+                        resDate = new DateTime(Int32.Parse(maY4[0].Value), Int32.Parse(maY2[1].Value), Int32.Parse(maY4[0].Value));
+                        break;
+              
+                   
+                }
             }
+            else
+            {
+
+
+                switch (maY2.Count)
+                {
+                    case 2:  // Неделя
+                        sYear = maY2[1].Value;
+                        resDate = new DateTime(Int32.Parse(sYear), 1, 1, new GregorianCalendar());
+                       
+
+                        resDate = myCal.AddWeeks(resDate, Int32.Parse(maY2[0].Value));
+                        break;
+                    case 3:  // День и месяц
+                        
+                        sYear = maY2[2].Value;
+                        
+                        resDate = new DateTime(Int32.Parse(maY2[2].Value), Int32.Parse(maY2[1].Value), Int32.Parse(maY2[0].Value));
+                        break;
+
+
+                }
+            }
+           
+            
+            
             return resDate;
         }
  
