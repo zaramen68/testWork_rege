@@ -15,6 +15,8 @@ namespace testWork
         public static DateTime ParceDate(string source)
         {
             int year;
+            int day, month;
+            int defaultMillenium = 2000;
             string sYear;
             DateTime resDate=new DateTime();
             Calendar myCal = CultureInfo.InvariantCulture.Calendar;
@@ -44,34 +46,36 @@ namespace testWork
                     case 1:
                         // Неделя
 
-                        resDate = myCal.AddWeeks(resDate, Int32.Parse(maY2[0].Value));
+                        resDate = myCal.AddWeeks(resDate, Int32.Parse(maY2[0].Value)!=0 ? Int32.Parse(maY2[0].Value)-1 : 0  );
+                        int dw = (int) myCal.GetDayOfWeek(resDate);
+                        resDate = resDate.AddDays((resDate.Day <= 6 && resDate.Month == 1)? 0: (1 - dw));
                         break;
                     case 2:
                         // День и месяц
-                        resDate = new DateTime(Int32.Parse(maY4[0].Value), Int32.Parse(maY2[1].Value), Int32.Parse(maY4[0].Value));
-                        break;
-              
-                   
+                        month = Int32.Parse(maY2[1].Value);
+                        day = Int32.Parse(maY2[0].Value);
+                        resDate = new DateTime(Int32.Parse(maY4[0].Value), month , day);
+                        break;                
                 }
             }
             else
             {
-
-
+                
                 switch (maY2.Count)
                 {
                     case 2:  // Неделя
                         sYear = maY2[1].Value;
-                        resDate = new DateTime(Int32.Parse(sYear), 1, 1, new GregorianCalendar());
-                       
-
-                        resDate = myCal.AddWeeks(resDate, Int32.Parse(maY2[0].Value));
+                        year = Int32.Parse(sYear) + defaultMillenium;
+                        resDate = new DateTime(year, 1, 1, new GregorianCalendar());                    
+                        resDate = myCal.AddWeeks(resDate, Int32.Parse(maY2[0].Value) != 0 ? Int32.Parse(maY2[0].Value) - 1 : 0);
+                        int dw = (int)myCal.GetDayOfWeek(resDate);
+                        resDate = resDate.AddDays((resDate.Day <= 6 && resDate.Month == 1) ? 0 : (1 - dw));
                         break;
                     case 3:  // День и месяц
                         
                         sYear = maY2[2].Value;
-                        
-                        resDate = new DateTime(Int32.Parse(maY2[2].Value), Int32.Parse(maY2[1].Value), Int32.Parse(maY2[0].Value));
+                        year = Int32.Parse(sYear) + defaultMillenium;
+                        resDate = new DateTime(year, Int32.Parse(maY2[1].Value), Int32.Parse(maY2[0].Value));
                         break;
 
 
@@ -192,7 +196,7 @@ namespace testWork
         static void Main(string[] args)
         {
 
-            DateTime dateTime = ParceDate("08/04.2020");
+            DateTime dateTime = ParceDate("08.20");
             string str = "Иванов Иван, 97 кабинет, пн-ср, 06:00 - 15:00, 11:00-12:00";
             string result = ParceData(str);
             Console.WriteLine(result);
