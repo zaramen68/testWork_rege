@@ -21,7 +21,7 @@ namespace testWork
             Dictionary<string, string> reStruct = new Dictionary<string, string>();
             string patternName = @"\b\p{Lu}\w*";
             string patternTime = @"\d{2}\:\d{2}";
-            string patternRestTime = @"\d{2}-\d{2}";
+           
             string patterDays = @"\p{Ll}{2}|\p{Ll}{2}-\p{Ll}{2}";
             string cab = @"\bкаб\w*|\bпомещ\w*";
             string cabNum = @"\d+";
