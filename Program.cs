@@ -132,10 +132,8 @@ namespace testWork
                 MatchCollection matchCabNum = regexCabNum.Matches(item);
                 if (matchCab.Count == 1 && matchCabNum.Count == 1)
                 {
-                    foreach (Match mat in matchCabNum){
-                        reStruct.Add("Кабинет:", mat.Value);
-                    }
                     
+                    reStruct.Add("Кабинет:", matchCabNum[0].Value);
                     continue;
                 }
 
