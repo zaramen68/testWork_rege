@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testWork", "testWork.csproj", "{A7697524-EA1C-4AF4-A022-27F070AE104D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Equalizer", "..\Equalizer\Equalizer.csproj", "{B4DE4754-9502-4E40-AD53-9B62E499696B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Equalizer", "..\Equalizer\Equalizer.csproj", "{B4DE4754-9502-4E40-AD53-9B62E499696B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "teamTest", "..\teamTest\teamTest.csproj", "{0CAB4C91-3DB9-44C6-9856-1A0D19E1F3C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B4DE4754-9502-4E40-AD53-9B62E499696B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4DE4754-9502-4E40-AD53-9B62E499696B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4DE4754-9502-4E40-AD53-9B62E499696B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CAB4C91-3DB9-44C6-9856-1A0D19E1F3C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CAB4C91-3DB9-44C6-9856-1A0D19E1F3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CAB4C91-3DB9-44C6-9856-1A0D19E1F3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CAB4C91-3DB9-44C6-9856-1A0D19E1F3C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
